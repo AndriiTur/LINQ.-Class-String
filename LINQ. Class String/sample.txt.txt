@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,7 +14,7 @@ namespace LINQ.Class_String
             #region Task8_1
             //List<int> digits = new List<int>();
             //Random rand = new Random();
-
+            
             //for (int i = 0; i < 10; i++)
             //{
             //    digits.Add(rand.Next(-20, 21));
@@ -61,75 +61,58 @@ namespace LINQ.Class_String
             #endregion
 
             #region HomeWork8_A
-            //Shape shapMaxPerim = new Circle("null", 0);
-            //List<Shape> myShapes = new List<Shape>();
-            //var currentDir = Directory.GetCurrentDirectory();
+            Shape shapMaxPerim = new Circle("null", 0);
+            List<Shape> myShapes = new List<Shape>();
+            var currentDir = Directory.GetCurrentDirectory();
 
-            //myShapes.Add(new Circle("C001", 10));
-            //myShapes.Add(new Circle("C00a3", 1));
-            //myShapes.Add(new Circle("C004", 4));
-            //myShapes.Add(new Square("S001", 10));
-            //myShapes.Add(new Square("S00a4", 3));
-            //myShapes.Add(new Square("S005", 1));
+            myShapes.Add(new Circle("C001", 10));
+            myShapes.Add(new Circle("C00a3", 1));
+            myShapes.Add(new Circle("C004", 4));
+            myShapes.Add(new Square("S001", 10));
+            myShapes.Add(new Square("S00a4", 3));
+            myShapes.Add(new Square("S005", 1));
 
-            //var shapesAreaRank = from shape in myShapes
-            //                     where shape.Area() >= 10 && shape.Area() <= 100
-            //                     select new { name = shape.Name, area = shape.Area() };
+            var shapesAreaRank = from shape in myShapes
+                                 where shape.Area() >= 10 && shape.Area() <= 100
+                                 select new { name = shape.Name, area = shape.Area() };
 
-            //foreach (var shape in myShapes)
-            //{
-            //    Console.WriteLine("All shapes: {0} = {1}", shape.Name, shape.Perimeter());
-            //}
+            foreach (var shape in myShapes)
+            {
+                Console.WriteLine("All shapes: {0} = {1}", shape.Name, shape.Perimeter());
+            }
 
-            //using (StreamWriter writer = new StreamWriter(currentDir + @"\shapesAreaRank.txt"))
-            //{
-            //    foreach (var shape in shapesAreaRank)
-            //    {
-            //        writer.WriteLine("Shapes Where Area in [10,100]: {0} = {1}", shape.name, shape.area);
-            //    }
-            //}
+            using (StreamWriter writer = new StreamWriter(currentDir + "shapesAreaRank.txt"))
+            {
+                foreach (var shape in shapesAreaRank)
+                {
+                    writer.WriteLine("Shapes Where Area in [10,100]: {0} = {1}", shape.name, shape.area);
+                }
+            }
 
-            //var shapesContainsLeterA = from shape in myShapes
-            //                           where shape.Name.Contains('a')
-            //                           select shape.Name;
+            var shapesContainsLeterA = from shape in myShapes
+                                       where shape.Name.Contains('a')
+                                       select shape.Name;
 
-            //using (StreamWriter writer = new StreamWriter(currentDir + @"\shapesContainsLeterA.txt"))
-            //{
-            //    foreach (var shape in shapesContainsLeterA)
-            //    {
-            //        writer.WriteLine("Shapes Where conatains 'a' in name: {0}", shape);
-            //    }
-            //}
+            using (StreamWriter writer = new StreamWriter(currentDir + "shapesContainsLeterA.txt"))
+            {
+                foreach (var shape in shapesContainsLeterA)
+                {
+                    writer.WriteLine("Shapes Where conatains 'a' in name: {0}", shape);
+                }
+            }
 
-            //Console.WriteLine("");
+            Console.WriteLine("");
 
-            //myShapes.RemoveAll(x => x.Perimeter() < 5);
+            myShapes.RemoveAll(x => x.Perimeter() < 5);
 
-            //foreach (var shape in myShapes)
-            //    Console.WriteLine("Shapes without shape where with perimeter < 5: {0} = {1}", shape.Name, shape.Perimeter());
+            foreach (var shape in myShapes)
+                Console.WriteLine("Shapes without shape where with perimeter < 5: {0} = {1}", shape.Name, shape.Perimeter());
 
-            //Console.ReadKey();
+            Console.ReadKey();
             #endregion
 
             #region HomeWork8_B
-            var file = "sample.txt";
-            var currentDir =  Directory.GetCurrentDirectory() + "\\" + file;
 
-            Console.WriteLine(currentDir);
-
-            using (StreamReader sr = new StreamReader(currentDir))
-            {
-                file = sr.ReadToEnd();
-            }
-            Console.WriteLine(file);
-
-            var textFromFile = file.Split(new char[]{ '\n' });
-            for (int i = 0; i < textFromFile.Length; i++)
-            {
-                Console.WriteLine(textFromFile[i]);
-            }
-
-            Console.ReadKey();
             #endregion
         }
     }
