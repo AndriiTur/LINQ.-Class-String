@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -62,29 +63,45 @@ namespace LINQ.Class_String
             #region HomeWork8_A
             Shape shapMaxPerim = new Circle("null", 0);
             List<Shape> myShapes = new List<Shape>();
+            var currentDir = Directory.GetCurrentDirectory();
 
             myShapes.Add(new Circle("C001", 10));
-            myShapes.Add(new Circle("C003", 3));
+            myShapes.Add(new Circle("C00a3", 1));
             myShapes.Add(new Circle("C004", 4));
             myShapes.Add(new Square("S001", 10));
-            myShapes.Add(new Square("S004", 4));
-            myShapes.Add(new Square("S005", 5));
+            myShapes.Add(new Square("S00a4", 3));
+            myShapes.Add(new Square("S005", 1));
 
             var shapesAreaRank = from shape in myShapes
                                  where shape.Area() >= 10 && shape.Area() <= 100
                                  select new { name = shape.Name, area = shape.Area() };
 
-            foreach (var shape in shapesAreaRank)
-                Console.WriteLine("Shapes Where Area in [10,100]: {0} = {1}", shape.name, shape.area);
+            foreach (var shape in myShapes)
+            {
+                Console.WriteLine("All shapes: {0} = {1}", shape.Name, shape.Perimeter());
+            }
 
-            Console.WriteLine("");
+            using (StreamWriter writer = new StreamWriter(currentDir + "shapesAreaRank.txt"))
+            {
+                foreach (var shape in shapesAreaRank)
+                {
+                    writer.WriteLine("Shapes Where Area in [10,100]: {0} = {1}", shape.name, shape.area);
+                }
+            }
 
             var shapesContainsLeterA = from shape in myShapes
                                        where shape.Name.Contains('a')
                                        select shape.Name;
 
-            foreach (var shape in shapesContainsLeterA)
-                Console.WriteLine("Shapes Where conatains 'a' in name: {0}", shape);
+            using (StreamWriter writer = new StreamWriter(currentDir + "shapesContainsLeterA.txt"))
+            {
+                foreach (var shape in shapesContainsLeterA)
+                {
+                    writer.WriteLine("Shapes Where conatains 'a' in name: {0}", shape);
+                }
+            }
+
+            Console.WriteLine("");
 
             myShapes.RemoveAll(x => x.Perimeter() < 5);
 
