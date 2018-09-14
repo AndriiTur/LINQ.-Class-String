@@ -115,18 +115,37 @@ namespace LINQ.Class_String
             var file = "sample.txt";
             var currentDir =  Directory.GetCurrentDirectory() + "\\" + file;
 
-            Console.WriteLine(currentDir);
-
-            using (StreamReader sr = new StreamReader(currentDir))
+            try
             {
-                file = sr.ReadToEnd();
+                using (StreamReader sr = new StreamReader(currentDir))
+                {
+                    file = sr.ReadToEnd();
+                }
             }
-            Console.WriteLine(file);
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
             var textFromFile = file.Split(new char[]{ '\n' });
-            for (int i = 0; i < textFromFile.Length; i++)
+
+            if (textFromFile.Length > 0)
             {
-                Console.WriteLine(textFromFile[i]);
+                for (int i = 0; i < textFromFile.Length; i++)
+                {
+                    Console.WriteLine($"{i} count = {textFromFile[i].Length}");
+                }
+            }
+
+            Console.WriteLine("");
+            Console.WriteLine($"Max Length Line {textFromFile.OrderByDescending(s => s.Length).First().Length}" +
+                $"\nMin Length Line {textFromFile.OrderBy(s => s.Length).First().Length}");
+
+            Console.WriteLine("");
+            var stringWithVar = textFromFile.Where(t => t.Contains("var"));
+            foreach (var st in stringWithVar)
+            {
+                Console.WriteLine($"{st}");
             }
 
             Console.ReadKey();
